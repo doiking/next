@@ -15,8 +15,9 @@ const DeleteItem = (context) => {
     const loginUserEmail = useAuth() 
 
     useEffect(() => {
-        const getSingleItem = async(id) => {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/item/readsingle/${id}`, {cache: "no-store"})
+        const getSingleItem = async() => {             //　「id」を削除
+            const params = await context.params       // 追加                                  // ↓変更
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/item/readsingle/${params.id}`, {cache: "no-store"})
             const jsonData = await response.json() 
             const singleItem = jsonData.singleItem
             setTitle(singleItem.title)
@@ -24,14 +25,16 @@ const DeleteItem = (context) => {
             setImage(singleItem.image)
             setDescription(singleItem.description)
             setEmail(singleItem.email) 
+            setLoading(true)  
         }  
-        getSingleItem(context.params.id) 
+        getSingleItem()                          //　「context.params.id」を削除
     }, [context]) 
 
     const handleSubmit = async(e) => {
         e.preventDefault() 
-        try{
-            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/item/delete/${context.params.id}`, {
+        const params = await context.params         // 追加 
+        try{                                                                               // ↓変更
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/item/delete/${params.id}`, {
                 method: "DELETE",
                 headers: { 
                     "Accept": "application/json", 

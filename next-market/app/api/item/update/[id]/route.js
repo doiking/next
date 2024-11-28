@@ -6,8 +6,8 @@ export async function PUT(request, context){
     const reqBody = await request.json() 
     try{
         await connectDB()
-        const singleItem = await ItemModel.findById(context.params.id)
-
+        const params = await context.params                         // 追加
+        const singleItem = await ItemModel.findById(params.id)      // 変更
         if(singleItem.email === reqBody.email){
             await ItemModel.updateOne({_id: params.id}, reqBody)   // 変更
             return NextResponse.json({message: "アイテム編集成功"})

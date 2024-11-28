@@ -9,7 +9,8 @@ const getSingleItem = async(id) => {
 }  
 
 const ReadSingleItem = async(context) => {
-    const singleItem = await getSingleItem(context.params.id)
+    const params = await context.params                // 追加
+    const singleItem = await getSingleItem(params.id)  // 変更
     return (
         <div className="grid-container-si">
             <div>

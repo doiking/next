@@ -1,24 +1,22 @@
 import mongoose from "mongoose"
 
 const Schema = mongoose.Schema
-const ItemSchema = new Schema({
 
-    title: String,
+const ItemSchema = new Schema({
+    title: String,        
     image: String,
-    price: String,
+    price: String,    
     description: String,
     email: String,
 })
 
-
-//ユーザー登録
 const UserSchema = new Schema({
     name: {
         type: String,
         required: true
     },
     email: {
-        type : String,
+        type: String,
         required: true,
         unique: true
     },
@@ -28,6 +26,5 @@ const UserSchema = new Schema({
     }
 })
 
-
-export const ItemModel = mongoose.models.Item || mongoose.model("Item" , ItemSchema)
+export const ItemModel = mongoose.models.Item || mongoose.model("Item", ItemSchema)
 export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)
