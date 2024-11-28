@@ -10,10 +10,12 @@ const ItemSchema = new Schema({
     email: String,
 })
 
+
+//ユーザー登録
 const UserSchema = new Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     email: {
         type : String,
@@ -28,4 +30,4 @@ const UserSchema = new Schema({
 
 
 export const ItemModel = mongoose.models.Item || mongoose.model("Item" , ItemSchema)
-export const UserModel = mongoose.model.User || mongoose.model("User", UserSchema)
+export const UserModel = mongoose.models.User || mongoose.model("User", UserSchema)
